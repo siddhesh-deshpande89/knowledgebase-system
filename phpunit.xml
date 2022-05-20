@@ -15,7 +15,11 @@
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./app</directory>
+            <directory suffix=".php">./src</directory>
         </include>
+        <report>
+            <html outputDirectory="reports/coverage"/>
+        </report>
     </coverage>
     <php>
         <env name="APP_ENV" value="testing"/>
