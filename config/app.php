@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use KnowledgeSystem\Infrastructure\Providers\RepositoryServiceProvider;
+use KnowledgeSystem\Infrastructure\Providers\ServiceProvider;
 
 return [
 
@@ -195,6 +197,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FactoryServiceProvider::class,
+
+        ServiceProvider::class,
+        RepositoryServiceProvider::class,
 
     ],
 
