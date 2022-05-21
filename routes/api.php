@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use KnowledgeSystem\Application\Controllers\Articles\CreateArticleController;
+use KnowledgeSystem\Application\Controllers\Articles\ViewArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'articles'], function () {
+    Route::post('/create', CreateArticleController::class)->name('article.create');
+    Route::get('/{articleId}', ViewArticleController::class)->name('article.show');
 });
