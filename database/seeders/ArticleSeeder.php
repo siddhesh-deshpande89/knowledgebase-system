@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use KnowledgeSystem\Infrastructure\Models\Article;
-use KnowledgeSystem\Infrastructure\Models\Category;
+use KnowledgeSystem\Infrastructure\Models\ArticleRating;
+use KnowledgeSystem\Infrastructure\Models\ArticleView;
 
 class ArticleSeeder extends Seeder
 {
@@ -15,7 +16,6 @@ class ArticleSeeder extends Seeder
      */
     public function run()
     {
-
         Article::factory()
             ->count(1000)->create();
     }
