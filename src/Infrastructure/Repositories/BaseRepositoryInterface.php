@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KnowledgeSystem\Infrastructure\Repositories;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 interface BaseRepositoryInterface
@@ -19,4 +20,11 @@ interface BaseRepositoryInterface
      * @return Model
      */
     public function find(int $id): ?Model;
+
+    /**
+     * @param $id
+     *
+     * @return Builder
+     */
+    public function where($condition): Builder;
 }

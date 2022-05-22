@@ -42,7 +42,7 @@ class ViewArticleTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidArticleIds
+     * @dataProvider provideInvalidArticleIds
      * @test
      */
     public function shouldReturnNotFoundHttpStatusWithInvalidArticleIdInUrl($articleId)
@@ -52,7 +52,7 @@ class ViewArticleTest extends TestCase
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
-    private function invalidArticleIds(): array
+    private function provideInvalidArticleIds(): array
     {
         return [
             'article id is 2'             => [2],

@@ -14,6 +14,8 @@ class Category extends Model
 
     protected $fillable = ['title'];
 
+    protected $visible = ['id', 'title'];
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Article::class);

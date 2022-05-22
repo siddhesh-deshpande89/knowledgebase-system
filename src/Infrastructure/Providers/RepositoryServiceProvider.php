@@ -7,6 +7,8 @@ use KnowledgeSystem\Infrastructure\Repositories\Articles\ArticleRepository;
 use KnowledgeSystem\Infrastructure\Repositories\Articles\ArticleRepositoryInterface;
 use KnowledgeSystem\Infrastructure\Repositories\BaseRepository;
 use KnowledgeSystem\Infrastructure\Repositories\BaseRepositoryInterface;
+use KnowledgeSystem\Infrastructure\Repositories\Ratings\RatingRepository;
+use KnowledgeSystem\Infrastructure\Repositories\Ratings\RatingRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(BaseRepositoryInterface::class, BaseRepository::class);
         $this->app->bind(ArticleRepositoryInterface::class, ArticleRepository::class);
+        $this->app->bind(RatingRepositoryInterface::class, RatingRepository::class);
     }
 
     /**

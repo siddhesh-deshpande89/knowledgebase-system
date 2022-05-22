@@ -38,4 +38,9 @@ class Article extends Model
     {
         return $this->hasMany(ArticleView::class);
     }
+
+    public function getCategories()
+    {
+        return $this->categories()->get();
+    }
 }

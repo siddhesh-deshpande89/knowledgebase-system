@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 
-class IncreaseArticleViewJob implements ShouldQueue
+class RateArticleJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
@@ -16,7 +16,7 @@ class IncreaseArticleViewJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(int $articleId, string $ipAddress)
+    public function __construct(int $articleId, int $rating)
     {
 
     }

@@ -28,4 +28,12 @@ class ArticleService implements ArticleServiceInterface
 
         return $article;
     }
+
+    public function createArticle(array $data): Article
+    {
+        $article = $this->repository->create($data);
+        $article->categories()->sync($data['categories']);
+
+        return $article;
+    }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('rating');
             $table->timestamps();
 
+            $table->unique(['article_id', 'ip_address']);
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
         });
     }
