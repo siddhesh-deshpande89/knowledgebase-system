@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Articles;
 
+
+use Illuminate\Support\Facades\Queue;
+use KnowledgeSystem\Infrastructure\Jobs\IncreaseArticleViewJob;
 use KnowledgeSystem\Infrastructure\Models\Article;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -18,6 +21,7 @@ class ViewArticleTest extends TestCase
      */
     public function shouldShowArticleContentCorrectly()
     {
+        Queue::fake();
         $article = Article::factory(1)->create()->first();
         $response = $this->getJson(sprintf('api/articles/%s', $article->id));
         $response->assertExactJson([
@@ -30,6 +34,7 @@ class ViewArticleTest extends TestCase
                                        ],
                                    ]);
         $response->assertStatus(Response::HTTP_OK);
+        Queue::assertPushed(IncreaseArticleViewJob::class);
     }
 
     /**

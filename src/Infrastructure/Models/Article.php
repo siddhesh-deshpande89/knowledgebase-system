@@ -117,6 +117,14 @@ class Article extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function guest_views(): HasMany
+    {
+        return $this->hasMany(ArticleGuestView::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getCategories()

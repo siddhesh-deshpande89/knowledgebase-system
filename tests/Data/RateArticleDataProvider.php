@@ -64,7 +64,7 @@ class RateArticleDataProvider extends AbstractDataProvider
             'rating is more than five'   => [
                 'data'   => [
                     'article_id' => 1,
-                    'rating'     => rand(5, 10),
+                    'rating'     => rand(6, 10),
                 ],
                 'errors' => [
                     'rating' => ['The rating must not be greater than 5.'],

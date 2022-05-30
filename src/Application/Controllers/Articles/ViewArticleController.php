@@ -41,7 +41,7 @@ class ViewArticleController extends Controller
         $item = $this->itemFactory->create($article);
         $data = $this->manager->createData($item)->toArray();
 
-        IncreaseArticleViewJob::dispatch($articleId, $request->ip())->onQueue(self::QUEUE_NAME);
+       IncreaseArticleViewJob::dispatch($articleId, $request->ip())->onQueue(self::QUEUE_NAME);
 
         return response()->json($data);
     }

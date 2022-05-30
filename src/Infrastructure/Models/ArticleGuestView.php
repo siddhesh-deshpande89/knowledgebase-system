@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ArticleGuestView extends Model
 {
     use HasFactory;
+    protected $fillable = ['ip_address'];
 
     public function articles(): BelongsTo
     {

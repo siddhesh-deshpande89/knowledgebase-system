@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class ArticleView extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['view_count'];
     public function articles(): BelongsTo
     {
         return $this->belongsTo(Article::class);

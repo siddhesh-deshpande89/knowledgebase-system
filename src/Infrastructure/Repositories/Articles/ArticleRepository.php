@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace KnowledgeSystem\Infrastructure\Repositories\Articles;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use KnowledgeSystem\Application\DTO\SearchCriteriaDTO;
 use KnowledgeSystem\Infrastructure\Models\Article;
+use KnowledgeSystem\Infrastructure\Models\ArticleGuestView;
 use KnowledgeSystem\Infrastructure\Models\ArticleView;
 use KnowledgeSystem\Infrastructure\Repositories\BaseRepository;
 
@@ -51,6 +53,63 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
             ->filterCreatedDate($searchCriteria->created_from, $searchCriteria->created_to)
             ->sortArticles($searchCriteria->type, $searchCriteria->sort)
             ->paginate($this->paginateCount);
+    }
+
+    public function getArticleGuestView(Article $article, string $ipAddress): int
+    {
+        return $article->whereHas(
+            'guest_views',
+            function ($query) use ($ipAddress) {
+                return $query->where('ip_address', $ipAddress);
+            },
+        )->count();
+    }
+
+    /**
+     * @param \KnowledgeSystem\Infrastructure\Models\Article $article
+     * @param                                                $data
+     *
+     * @return \KnowledgeSystem\Infrastructure\Models\ArticleGuestView
+     */
+    public function createArticleGuestView(Article $article, $data): ArticleGuestView
+    {
+        return $article->guest_views()->create($data);
+    }
+
+    /**
+     * @param \KnowledgeSystem\Infrastructure\Models\Article $article
+     *
+     * @return  int
+     */
+    public function getTodayViewCount(Article $article): int
+    {
+        return $article->whereHas('views', function ($query) {
+            return $query->whereDate('created_at', Carbon::now());
+        })->count();
+    }
+
+    /**
+     * @param \KnowledgeSystem\Infrastructure\Models\Article $article
+     *
+     * @return int
+     */
+    public function updateTodayArticleViewCount(Article $article): int
+    {
+        return $article->views()
+            ->whereDate('created_at', Carbon::now())
+            ->increment('view_count');
+    }
+
+    /**
+     * @param \KnowledgeSystem\Infrastructure\Models\Article $article
+     *
+     * @return int
+     */
+    public function createTodayArticleViewCount(Article $article): int
+    {
+        $article->views()->create(['view_count' => 1]);
+
+        return 1;
     }
 
     /**
