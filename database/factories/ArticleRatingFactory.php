@@ -20,4 +20,13 @@ class ArticleRatingFactory extends Factory
             'ip_address' => $this->faker->ipv4(),
         ];
     }
+
+    public function testUser()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'ip_address' => '54.65.32.22',
+            ];
+        });
+    }
 }

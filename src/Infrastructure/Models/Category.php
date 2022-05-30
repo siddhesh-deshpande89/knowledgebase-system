@@ -13,10 +13,9 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['title'];
-
     protected $visible = ['id', 'title'];
 
-    public function categories(): BelongsToMany
+    public function articles(): BelongsToMany
     {
         return $this->belongsToMany(Article::class);
     }

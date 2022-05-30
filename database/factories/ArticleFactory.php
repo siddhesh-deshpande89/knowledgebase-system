@@ -32,8 +32,8 @@ class ArticleFactory extends Factory
             // Once an Article record has been created
             // Pick between 1 and 5 Category records in a random order
             // Associate the Article and Category records
-            $article->categories()
-                ->attach(Category::inRandomOrder()->take(random_int(1, 10))->pluck('id'));
+            // $article->categories()
+            //     ->attach(Category::inRandomOrder()->take(random_int(1, 10))->pluck('id'));
         });
     }
 }

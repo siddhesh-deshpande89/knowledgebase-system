@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository implements BaseRepositoryInterface
 {
+    protected $paginateCount = 10;
+
     /**
      * @var Model
      */

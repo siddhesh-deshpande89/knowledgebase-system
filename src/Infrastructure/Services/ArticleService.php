@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KnowledgeSystem\Infrastructure\Services;
 
+use KnowledgeSystem\Application\DTO\SearchCriteriaDTO;
 use KnowledgeSystem\Application\Services\ArticleServiceInterface;
 use KnowledgeSystem\Infrastructure\Models\Article;
 use KnowledgeSystem\Infrastructure\Repositories\Articles\ArticleRepositoryInterface;
@@ -31,9 +32,10 @@ class ArticleService implements ArticleServiceInterface
 
     public function createArticle(array $data): Article
     {
-        $article = $this->repository->create($data);
-        $article->categories()->sync($data['categories']);
+       return $this->repository->createArticle($data);
+    }
 
-        return $article;
+    public function getArticles(SearchCriteriaDTO $searchCriteria) {
+        return $this->repository->getArticles($searchCriteria);
     }
 }

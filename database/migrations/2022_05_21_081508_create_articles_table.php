@@ -19,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('body');
+            $table->float('weighted_average')->default(0);
             $table->unsignedTinyInteger('active')->default(self::ACTIVE)->comment('0 = inactive, 1 = active');
             $table->timestamps();
         });

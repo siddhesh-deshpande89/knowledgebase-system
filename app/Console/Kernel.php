@@ -4,9 +4,14 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use KnowledgeSystem\Application\Commands\RecalculateArticlesCommand;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        RecalculateArticlesCommand::class
+    ];
+
     /**
      * Define the application's command schedule.
      *

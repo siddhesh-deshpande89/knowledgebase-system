@@ -12,6 +12,8 @@ class ArticleRating extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['article_id','rating','ip_address'];
+
     public function articles(): BelongsTo
     {
         return $this->belongsTo(Article::class);

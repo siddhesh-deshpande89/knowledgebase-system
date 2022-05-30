@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use KnowledgeSystem\Application\Services\RatingServiceInterface;
 
-class RateArticleJob implements ShouldQueue
+class RecalculateRatingJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
+
+    private $articleId;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(int $articleId, int $rating)
+    public function __construct(int $articleId)
     {
-
+        $this->articleId = $articleId;
     }
 
     /**
@@ -26,8 +29,8 @@ class RateArticleJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(RatingServiceInterface $ratingService)
     {
-        // TODO
+        $ratingService->recalculateWeightedAverageRating($this->articleId);
     }
 }

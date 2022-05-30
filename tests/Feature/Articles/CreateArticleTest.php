@@ -13,6 +13,8 @@ use Tests\TestCase;
  */
 class CreateArticleTest extends TestCase
 {
+    const ENDPOINT = 'api/articles/create';
+
     /**
      * @test
      * @dataProvider Tests\Data\CreateArticleDataProvider::provideInvalidArticleCreateInput
@@ -20,7 +22,7 @@ class CreateArticleTest extends TestCase
     public function shouldThrowValidationErrorOnInvalidInput($data, $expectedErrors)
     {
         Category::factory()->count(1)->create();
-        $response = $this->postJson('api/articles/create', $data);
+        $response = $this->postJson(self::ENDPOINT, $data);
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonValidationErrors($expectedErrors);
@@ -33,7 +35,7 @@ class CreateArticleTest extends TestCase
     public function shouldCreateArticleSuccessfullyOnValidInput($data)
     {
         $category = Category::factory()->count(1)->create()->first();
-        $response = $this->postJson('api/articles/create', $data);
+        $response = $this->postJson(self::ENDPOINT, $data);
 
         $this->assertDatabaseCount('articles', 1);
         $this->assertDatabaseHas('articles', ['title' => $data['title']]);
