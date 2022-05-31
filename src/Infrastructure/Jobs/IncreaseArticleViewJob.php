@@ -12,6 +12,8 @@ class IncreaseArticleViewJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable;
 
+    private int $articleId;
+    private string $ipAddress;
     /**
      * Create a new job instance.
      *
@@ -19,7 +21,8 @@ class IncreaseArticleViewJob implements ShouldQueue
      */
     public function __construct(int $articleId, string $ipAddress)
     {
-
+        $this->articleId = $articleId;
+        $this->ipAddress = $ipAddress;
     }
 
     /**
@@ -31,6 +34,6 @@ class IncreaseArticleViewJob implements ShouldQueue
         ArticleServiceInterface $articleService
     )
     {
-        $articleService->updateArticleViewCount();
+        $articleService->updateArticleViewCount($this->articleId, $this->ipAddress);
     }
 }
