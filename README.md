@@ -16,7 +16,20 @@ cd knowledgebase-system && ./vendor/bin/sail up -d
 ```
 - Navigate to http://localhost in your web browser.
 
-## Running Tests
+
+
+## Executing commands in docker container
+If you are not using php 8.x you will need to run tests in docker container.
+```
+docker exec -it knowledge-system-laravel.test-1  /bin/bash
+```
+
+## Running Migrations and Seeders
+```
+php artisan migrate --seed
+```
+
+## Testing
 If you are not using php 8.x you will need to run tests in docker container.
 ```
 docker exec -it knowledge-system-laravel.test-1 composer test
@@ -43,34 +56,9 @@ Test Coverage with unit tests only
 docker exec -it knowledge-system-laravel.test-1 composer test:coverage_unit
 ```
 
-##Database Schema
-categories Table
-
-| Field      | DataType  | Constraints                 | Comments                 |
-|------------|-----------|-----------------------------|--------------------------|
-| id         | bigint    | PrimaryKey                  |                          |
-| title      | varchar   | Not Null, Unique            |                          |
-| active     | tinyint   | Not Null, Default(1)        | 0 = inactive, 1 = active |
-| created_at | timestamp | CURRENT_TIMESTAMP           |                          |
-| updated_at | timestamp | On Update CURRENT_TIMESTAMP |                          |
-
-articles Table
-
-| Field      | DataType  | Constraints                 | Comments                 |
-|------------|-----------|-----------------------------|--------------------------|
-| id         | bigint    | PrimaryKey                  |                          |
-| title      | varchar   | Not Null                    |                          |
-| body       | long_text | Not Null                    |                          |
-| active     | tinyint   | Not Null, Default(1)        | 0 = inactive, 1 = active |
-| created_at | timestamp | CURRENT_TIMESTAMP           |                          |
-| updated_at | timestamp | On Update CURRENT_TIMESTAMP |                          |                      |                          |
-
-article_categories Table
-
-| Field       | DataType  | Constraints                 | Comments |
-|-------------|-----------|-----------------------------|----------|
-| id          | bigint    | PrimaryKey                  |          |
-| article_id  | bigint    | References articles.id      |          |
-| category_id | bigint    | References categories.id    |          |
-| created_at  | timestamp | CURRENT_TIMESTAMP           |          |
-| updated_at  | timestamp | On Update CURRENT_TIMESTAMP |          |                      |                          |
+## API Documentation
+The api documentation will be available at: http://localhost/api/documentation
+To generate the swagger api json file give the following command 
+```
+docker exec -it knowledge-system-laravel.test-1 php artisan l5-swagger:generate 
+```
