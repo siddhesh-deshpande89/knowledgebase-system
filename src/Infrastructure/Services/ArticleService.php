@@ -20,6 +20,11 @@ class ArticleService implements ArticleServiceInterface
         $this->repository = $repository;
     }
 
+    /**
+     * @param int $articleId
+     *
+     * @return \KnowledgeSystem\Infrastructure\Models\Article
+     */
     public function getArticle(int $articleId): Article
     {
         $article = $this->repository->find($articleId);
@@ -31,11 +36,21 @@ class ArticleService implements ArticleServiceInterface
         return $article;
     }
 
+    /**
+     * @param array $data
+     *
+     * @return \KnowledgeSystem\Infrastructure\Models\Article
+     */
     public function createArticle(array $data): Article
     {
         return $this->repository->createArticle($data);
     }
 
+    /**
+     * @param \KnowledgeSystem\Application\DTO\SearchCriteriaDTO $searchCriteria
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
     public function getArticles(SearchCriteriaDTO $searchCriteria): LengthAwarePaginator
     {
         return $this->repository->getArticles($searchCriteria);
@@ -74,7 +89,6 @@ class ArticleService implements ArticleServiceInterface
 
         if ($articleTodayViewCount > 0) {
             $this->repository->updateTodayArticleViewCount($article);
-
             return;
         }
 

@@ -3,10 +3,9 @@
 In this example we will setup a knowledgebase system with Laravel 9.x.
 - Setup a knowledgebase system that is capable running on cluster of web servers.
 - REST API endpoints to create, view, rate articles.
-- 100% Unit test coverage
 - Integration tests using sqlite, database factory and seeders.
-- Redis caching to cache the data
 - Job Dispatching for POST queries such as view count update.
+- Fuzzy search and tests using laravel scout
 
 ## Setup
 - Go to the project root folder and start docker container with the following command:
