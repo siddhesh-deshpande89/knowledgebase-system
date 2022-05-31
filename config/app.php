@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use KnowledgeSystem\Infrastructure\Providers\RepositoryServiceProvider;
+use KnowledgeSystem\Infrastructure\Providers\ServiceProvider;
 
 return [
 
@@ -194,6 +196,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\FactoryServiceProvider::class,
+
+        ServiceProvider::class,
+        RepositoryServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
 
     ],
 

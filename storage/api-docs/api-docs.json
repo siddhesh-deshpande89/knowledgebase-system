@@ -1,0 +1,423 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "KnowledgeBase API",
+        "description": "Knowledgebase System API Documentation",
+        "contact": {
+            "name": "Siddhesh",
+            "email": "siddhesh.deshpande89@gmail.com"
+        },
+        "version": "1.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api",
+            "description": "Knowledgebase System"
+        }
+    ],
+    "paths": {
+        "/articles/create": {
+            "post": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Create an article",
+                "operationId": "6534ff8f6c8cd344c84c972be0977f86",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateArticleRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "id": "1",
+                                        "title": "the big brown fox",
+                                        "body": "this is a test",
+                                        "categories": [
+                                            {
+                                                "id": 1,
+                                                "title": "test category1"
+                                            },
+                                            {
+                                                "id": 2,
+                                                "title": "test category2"
+                                            }
+                                        ],
+                                        "created_at": "2022-05-30T18:23:42.000000Z",
+                                        "updated_at": "2022-05-30T18:23:42.000000Z"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/articles/list": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "List articles and also filter them",
+                "operationId": "b469e88111c8eb2a070f9a5ef2ba16eb",
+                "parameters": [
+                    {
+                        "name": "category_ids",
+                        "in": "query",
+                        "description": "filter by category ids",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "1,2,3,4"
+                    },
+                    {
+                        "name": "created_from",
+                        "in": "query",
+                        "description": "created from date",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-05-22"
+                    },
+                    {
+                        "name": "created_to",
+                        "in": "query",
+                        "description": "created to date",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-05-23"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort by id, views, popularity",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "desc"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "type = views or popularity",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "views"
+                    },
+                    {
+                        "name": "views_from",
+                        "in": "query",
+                        "description": "filter views from date",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-05-22"
+                    },
+                    {
+                        "name": "views_to",
+                        "in": "query",
+                        "description": "filter views to date",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "2022-05-23"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Article title",
+                                            "categories": [
+                                                {
+                                                    "id": 1,
+                                                    "title": "test category1"
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "title": "test category7"
+                                                }
+                                            ],
+                                            "created_at": "2022-05-28T19:07:31.000000Z",
+                                            "updated_at": "2022-05-28T19:07:31.000000Z"
+                                        }
+                                    ],
+                                    "meta": {
+                                        "pagination": {
+                                            "total": 11,
+                                            "count": 11,
+                                            "per_page": 10,
+                                            "current_page": 2,
+                                            "total_pages": 2,
+                                            "links": {
+                                                "previous": "http://localhost/api/articles/list?page=1",
+                                                "next": "http://localhost/api/articles/list?page=3"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invalid url",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Request is unsuccessful: 404"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/articles/rate": {
+            "post": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Rate an article",
+                "operationId": "1bf9519a95b6da6c13cb8dc5fc1cbb64",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreRatingRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Article has been rated successfully."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "You have already rated this article."
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/articles/search": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Search article title and body using search keyword",
+                "operationId": "3aa0ce86ebd1f5aea7c9a2b54f6f57b9",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "filter by category ids",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "hello%20world"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Article title",
+                                            "body": "this is hello - world tutorial",
+                                            "categories": [
+                                                {
+                                                    "id": 1,
+                                                    "title": "test category1"
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "title": "test category7"
+                                                }
+                                            ],
+                                            "created_at": "2022-05-28T19:07:31.000000Z",
+                                            "updated_at": "2022-05-28T19:07:31.000000Z"
+                                        }
+                                    ],
+                                    "meta": {
+                                        "pagination": {
+                                            "total": 11,
+                                            "count": 11,
+                                            "per_page": 10,
+                                            "current_page": 2,
+                                            "total_pages": 2,
+                                            "links": {
+                                                "previous": "http://localhost/api/articles/list?page=1",
+                                                "next": "http://localhost/api/articles/list?page=3"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invalid url",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Request is unsuccessful: 404"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/articles/{articleId}": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "View article by id",
+                "operationId": "62a9bdaef710d9b97fbeb3e86f2852c5",
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "id": 1,
+                                        "title": "Article title",
+                                        "body": "Article body goes here",
+                                        "created_at": "2022-05-28T19:07:31.000000Z",
+                                        "updated_at": "2022-05-28T19:07:31.000000Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invalid article id",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Request is unsuccessful: 404"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateArticleRequest": {
+                "properties": {
+                    "title": {
+                        "description": "article title",
+                        "format": "string",
+                        "default": "test title"
+                    },
+                    "body": {
+                        "description": "article body",
+                        "format": "string",
+                        "default": "test body"
+                    },
+                    "categories[]": {
+                        "description": "Category id",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreRatingRequest": {
+                "properties": {
+                    "article_id": {
+                        "description": "article id",
+                        "format": "integer",
+                        "default": "1"
+                    },
+                    "rating": {
+                        "description": "rating between 1 to 5",
+                        "format": "string",
+                        "default": "1"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
