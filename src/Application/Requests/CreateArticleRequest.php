@@ -4,6 +4,9 @@ namespace KnowledgeSystem\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema()
+ */
 class CreateArticleRequest extends FormRequest
 {
     /**
@@ -17,9 +20,14 @@ class CreateArticleRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
+     * @OA\Property(format="string", default="test title", description="article title", property="title"),
+     * @OA\Property(format="string", default="test body", description="article body", property="body"),
+    @OA\Property(
+    property="categories[]",
+    description="Category id",
+    type="array",
+    @OA\Items(type="number"),
+    ),
      */
     public function rules()
     {

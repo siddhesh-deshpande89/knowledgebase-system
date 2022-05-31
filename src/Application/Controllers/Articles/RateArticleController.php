@@ -21,6 +21,39 @@ class RateArticleController extends Controller
         $this->ratingService = $ratingService;
     }
 
+    /**
+     * @OA\Post(
+     *     summary="Rate an article",
+     *     tags={"Article"},
+     *     security={{"bearerAuth":{}}},
+     *     path="/articles/rate",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref="#/components/schemas/StoreRatingRequest",
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="Success",
+     *     @OA\MediaType(
+     *          mediaType="application/json",
+     *          example={
+     *              "message": "Article has been rated successfully."
+     *          }
+     *     )
+     *    ),
+     *     @OA\Response(response=400,description="Bad Request",
+     *     @OA\MediaType(
+     *          mediaType="application/json",
+     *          example={
+     *              "message": "You have already rated this article."
+     *          }
+     *     )
+     *    ),
+     * )
+     */
     public function __invoke(StoreRatingRequest $request): JsonResponse
     {
         $articleRating = $this->ratingService->addRating(

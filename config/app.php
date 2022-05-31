@@ -200,6 +200,8 @@ return [
 
         ServiceProvider::class,
         RepositoryServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
+
 
     ],
 

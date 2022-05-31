@@ -27,6 +27,38 @@ class CreateArticleController extends Controller
         $this->itemFactory = $itemFactory;
     }
 
+    /**
+     * @OA\Post(
+     *     summary="Create an article",
+     *     tags={"Article"},
+     *     security={{"bearerAuth":{}}},
+     *     path="/articles/create",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref="#/components/schemas/CreateArticleRequest",
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(response=200,description="Success",
+     *     @OA\MediaType(
+     *          mediaType="application/json",
+     *          example={
+     *              "data": {
+     *                  "id": "1",
+     *                  "title": "the big brown fox",
+     *                  "body": "this is a test",
+     *                  "categories": {{"id": 1, "title": "test category1"}, {"id":2,"title":"test category2"}},
+     *                  "created_at": "2022-05-30T18:23:42.000000Z",
+     *                  "updated_at": "2022-05-30T18:23:42.000000Z"
+     *     },
+     *          }
+     *     )
+     *    ),
+     * )
+     */
     public function __invoke(CreateArticleRequest $request): JsonResponse
     {
         $article = $this->articleService->createArticle($request->all());

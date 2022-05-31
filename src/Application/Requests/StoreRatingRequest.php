@@ -4,6 +4,9 @@ namespace KnowledgeSystem\Application\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema()
+ */
 class StoreRatingRequest extends FormRequest
 {
     /**
@@ -17,9 +20,8 @@ class StoreRatingRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
+     * @OA\Property(format="integer", default="1", description="article id", property="article_id"),
+     * @OA\Property(format="string", default="1", description="rating between 1 to 5", property="rating"),
      */
     public function rules()
     {

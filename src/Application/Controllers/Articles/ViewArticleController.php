@@ -33,6 +33,37 @@ class ViewArticleController extends Controller
         $this->itemFactory = $itemFactory;
     }
 
+    /**
+     * @OA\Get(
+     *     summary="View article by id",
+     *     tags={"Article"},
+     *     security={{"bearerAuth":{}}},
+     *     path="/articles/{articleId}",
+     *     @OA\Parameter(name="articleId",in="path",required=true),
+     *     @OA\Response(response=200,description="Success",
+     *     @OA\MediaType(
+     *          mediaType="application/json",
+     *          example={
+     *           "data": {
+     *              "id": 1,
+     *              "title": "Article title",
+     *              "body": "Article body goes here",
+     *              "created_at": "2022-05-28T19:07:31.000000Z",
+     *              "updated_at": "2022-05-28T19:07:31.000000Z"
+     *           }
+     *       }
+     *     )
+     *    ),
+     *    @OA\Response(response=404,description="Invalid article id",
+     *     @OA\MediaType(
+     *          mediaType="application/json",
+     *          example={
+     *              "message": "Request is unsuccessful: 404",
+     *          }
+     *     )
+     *    ),
+     * )
+     */
     public function __invoke($articleId, Request $request): JsonResponse
     {
         $articleId = $this->requestValidator->validate($articleId);
