@@ -34,6 +34,11 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
     public function createArticle($data): Article
     {
         $article = $this->create($data);
+
+        $article->setAttribute('title', $article->title);
+        $article->setAttribute('body', $article->body);
+        $article->save();
+
         $article->categories()->sync($data['categories']);
 
         return $article;
@@ -123,5 +128,14 @@ class ArticleRepository extends BaseRepository implements ArticleRepositoryInter
             ->filterViewsDate($searchCriteria->views_from, $searchCriteria->views_to)
             ->whereColumn('article_id', 'articles.id')
             ->groupBy('article_id');
+    }
+
+    /**
+     * @param string $keyword
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function searchQuery(string $keyword): LengthAwarePaginator {
+        return Article::search($keyword)->paginate($this->paginateCount);
     }
 }

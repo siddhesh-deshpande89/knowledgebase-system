@@ -201,7 +201,7 @@ return [
         ServiceProvider::class,
         RepositoryServiceProvider::class,
         L5Swagger\L5SwaggerServiceProvider::class,
-
+        Laravel\Scout\ScoutServiceProvider::class,
 
     ],
 

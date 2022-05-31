@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use KnowledgeSystem\Infrastructure\Scopes\GlobalScopes\ActiveScope;
+use Laravel\Scout\Searchable;
 
 class Article extends Model
 {
-
+    use Searchable;
     private const TYPE_VIEWS = 'views';
     private const TYPE_POPULARITY = 'popularity';
 
@@ -130,5 +131,19 @@ class Article extends Model
     public function getCategories()
     {
         return $this->categories()->get();
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'body' => $this->body
+        ];
     }
 }

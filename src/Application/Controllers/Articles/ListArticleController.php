@@ -17,6 +17,7 @@ class ListArticleController extends Controller
 
     private ArticleServiceInterface $articleService;
     private Manager $manager;
+    private ListArticleTransformerFactory $collectionFactory;
 
     public function __construct(
         ArticleServiceInterface $articleService,

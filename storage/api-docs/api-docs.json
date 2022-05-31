@@ -250,6 +250,85 @@
                 ]
             }
         },
+        "/articles/search": {
+            "get": {
+                "tags": [
+                    "Article"
+                ],
+                "summary": "Search article title and body using search keyword",
+                "operationId": "3aa0ce86ebd1f5aea7c9a2b54f6f57b9",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "filter by category ids",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "hello%20world"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "title": "Article title",
+                                            "body": "this is hello - world tutorial",
+                                            "categories": [
+                                                {
+                                                    "id": 1,
+                                                    "title": "test category1"
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "title": "test category7"
+                                                }
+                                            ],
+                                            "created_at": "2022-05-28T19:07:31.000000Z",
+                                            "updated_at": "2022-05-28T19:07:31.000000Z"
+                                        }
+                                    ],
+                                    "meta": {
+                                        "pagination": {
+                                            "total": 11,
+                                            "count": 11,
+                                            "per_page": 10,
+                                            "current_page": 2,
+                                            "total_pages": 2,
+                                            "links": {
+                                                "previous": "http://localhost/api/articles/list?page=1",
+                                                "next": "http://localhost/api/articles/list?page=3"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Invalid url",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": "Request is unsuccessful: 404"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/articles/{articleId}": {
             "get": {
                 "tags": [

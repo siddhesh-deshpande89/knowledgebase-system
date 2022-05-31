@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KnowledgeSystem\Infrastructure\Repositories\Articles;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use KnowledgeSystem\Infrastructure\Models\Article;
 use KnowledgeSystem\Infrastructure\Models\ArticleGuestView;
@@ -58,4 +59,11 @@ interface ArticleRepositoryInterface
      * @return int
      */
     public function updateTodayArticleViewCount(Article $article): int;
+
+    /**
+     * @param string $keyword
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function searchQuery(string $keyword): LengthAwarePaginator;
 }
