@@ -25,7 +25,7 @@
                 "operationId": "6534ff8f6c8cd344c84c972be0977f86",
                 "requestBody": {
                     "content": {
-                        "application/x-www-form-urlencoded": {
+                        "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/CreateArticleRequest"
                             }
@@ -393,7 +393,7 @@
                         "format": "string",
                         "default": "test body"
                     },
-                    "categories[]": {
+                    "categories": {
                         "description": "Category id",
                         "type": "array",
                         "items": {

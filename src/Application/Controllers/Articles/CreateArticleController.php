@@ -35,7 +35,7 @@ class CreateArticleController extends Controller
      *     path="/articles/create",
      *     @OA\RequestBody(
      *         @OA\MediaType(
-     *             mediaType="application/x-www-form-urlencoded",
+     *             mediaType="application/json",
      *             @OA\Schema(
      *                 type="object",
      *                 ref="#/components/schemas/CreateArticleRequest",
@@ -53,7 +53,7 @@ class CreateArticleController extends Controller
      *                  "categories": {{"id": 1, "title": "test category1"}, {"id":2,"title":"test category2"}},
      *                  "created_at": "2022-05-30T18:23:42.000000Z",
      *                  "updated_at": "2022-05-30T18:23:42.000000Z"
-     *     },
+     *              },
      *          }
      *     )
      *    ),

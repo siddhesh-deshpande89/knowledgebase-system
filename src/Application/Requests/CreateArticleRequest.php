@@ -23,7 +23,7 @@ class CreateArticleRequest extends FormRequest
      * @OA\Property(format="string", default="test title", description="article title", property="title"),
      * @OA\Property(format="string", default="test body", description="article body", property="body"),
     @OA\Property(
-    property="categories[]",
+    property="categories",
     description="Category id",
     type="array",
     @OA\Items(type="number"),
