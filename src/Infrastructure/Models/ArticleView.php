@@ -13,10 +13,7 @@ class ArticleView extends Model
 {
     use HasFactory;
     protected $fillable = ['view_count'];
-    public function articles(): BelongsTo
-    {
-        return $this->belongsTo(Article::class);
-    }
+
 
     public function scopeFilterViewsDate(Builder $query, ?string $viewsFrom, ?string $viewsTo) {
 

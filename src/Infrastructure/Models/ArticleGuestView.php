@@ -12,9 +12,4 @@ class ArticleGuestView extends Model
 {
     use HasFactory;
     protected $fillable = ['ip_address'];
-
-    public function articles(): BelongsTo
-    {
-        return $this->belongsTo(Article::class);
-    }
 }
